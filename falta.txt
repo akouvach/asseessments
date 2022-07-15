@@ -1,0 +1,87 @@
+  jsonserver:
+    build:
+      context: ./jsonserver
+      dockerfile: dockerfile
+    restart: unless-stopped
+    container_name: assessjsonserver
+    networks: 
+      - assessinternalnetwork
+    ports:
+      - ${APPJSONPORT}:${APPJSONPORT}
+    environment:
+      - JSONPORT:${APPJSONPORT}
+    stdin_open: true 
+    volumes:
+      - ./jsonserver:/app
+redis-server:
+    image: 'redis'
+  node-redis:
+    build: 
+      context: ./redisServer
+    ports:
+      - ${NODEREDISPORT}:${NODEREDISPORT}     
+    container_name: nodeRedisServer  
+  go-app:
+    build: 
+      context: ./goserver
+    ports:
+      - ${GOSRVPORT}:${GOSRVPORT}     
+    container_name: goServer    
+    environment:
+      - OS=linux
+      - ARCH=amd64
+      - PORT=${GOSRVPORT}
+      - ENVIRONMENT=production
+      - DSN=host=host.docker.internal port=5432 user=postgres password=mafalda dbname=usca sslmode=disable
+
+
+
+  ui:
+    build:
+      context: ./reactjs
+      dockerfile: dockerfile
+    restart: unless-stopped
+    container_name: assessui
+    ports:
+      - ${APPUIPORT}:${APPUIPORT}
+    networks: 
+      - assessinternalnetwork
+    stdin_open: true 
+    environment:
+      - REACT_APP_BASEAPIURL:${BACKEND_SERVER}
+    volumes:
+      - ./reactjs:/app
+  jsonserver:
+    build:
+      context: ./jsonserver
+      dockerfile: dockerfile
+    restart: unless-stopped
+    container_name: assessjsonserver
+    networks: 
+      - assessinternalnetwork
+    ports:
+      - ${APPJSONPORT}:${APPJSONPORT}
+    environment:
+      - JSONPORT:${APPJSONPORT}
+    stdin_open: true 
+    volumes:
+      - ./jsonserver:/app  
+
+
+docker build --build-arg OS=linux --build-arg ARCH=amd64 -t uscabe_linux_amd64 .
+
+  go-app:
+    build: 
+      context: ./goserver
+      dockerfile: dockerfile
+    ports:
+      - ${APPSRVPORT}:${APPSRVPORT}     
+    container_name: apiServer    
+    environment:
+      - OS=linux
+      - ARCH=amd64
+      - PORT=${APPSRVPORT}
+      - ENVIRONMENT=production
+      - DSN=host=host.docker.internal port=5432 user=postgres password=mafalda dbname=usca sslmode=disable
+    networks: 
+      - assessinternalnetwork

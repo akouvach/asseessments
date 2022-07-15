@@ -1,0 +1,5 @@
+
+docker build --build-arg OS=linux --build-arg ARCH=amd64 -t uscabe_linux_amd64 .
+docker run -d --env-file envlist.env -p 8080:5000 -it uscabe_linux_amd64
+
+

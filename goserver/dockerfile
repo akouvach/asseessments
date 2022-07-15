@@ -1,0 +1,62 @@
+FROM golang:alpine as builder
+
+ENV PORT 4000
+
+WORKDIR /assess
+
+COPY go.mod ./
+COPY go.sum ./
+# RUN go mod download
+
+# COPY . ./ 
+ADD . /assess/
+RUN go mod tidy
+RUN go mod verify
+
+EXPOSE $PORT
+
+ARG OS
+ARG ARCH
+
+# RUN ls 
+RUN env GOOS=$OS GOARCH=$ARCH  go build -o api.o ./cmd/api/.
+
+FROM alpine:latest
+
+WORKDIR /assess
+
+COPY --from=builder assess/api.o .
+
+CMD [ "./api.o" ]
+
+
+# RUN apk update && apk upgrade && apk add --nocache bash git
+
+# ENV SOURCES /usca/backend/
+
+# COPY go.mod ./
+# COPY go.sum ./
+
+
+# RUN go get github.com/julienschmidt/httprouter
+# RUN go get github.com/justinas/alice
+# RUN go get github.com/lib/pq
+# RUN go get github.com/pascaldekloe/jwt
+# RUN go get github.com/sendgrid/rest
+# RUN go get github.com/sendgrid/sendgrid-go
+# RUN go get golang.org/x/crypto
+
+
+# COPY . ${SOURCES}
+
+# # RUN cd ${SOURCES} 
+# RUN go mod download
+
+# RUN CGO_ENABLED=0 go build ./cmd/api/.
+
+# # WORKDIR ${SOURCES}
+
+# # CMD ${SOURCES}api
+# CMD ["/api"]
+
+# EXPOSE 8080

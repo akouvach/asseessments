@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  mongo_server:
+    image: mongo
+    restart: always
+    volumes:
+      - C:\Users\AZ431GL\_Never Backup\mongo_assessments:/data/db 
+      - .\mongoserver\mongo.conf:/etc/mongo/mongo.conf
+    environment:
+      - PUID=1000
+      - PGID=1000
+    networks: 
+      - assessinternalnetwork      
+networks:
+  assessinternalnetwork:
+    driver: bridge
+
+
+

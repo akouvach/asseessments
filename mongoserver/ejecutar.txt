@@ -1,0 +1,5 @@
+docker run -d -p 27017:27017 --name test-mongo mongo:latest
+
+
+para ver los logs
+docker logs example-mongo --follow

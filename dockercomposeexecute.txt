@@ -1,0 +1,2 @@
+docker-compose --env-file .env_dev up
+docker-compose --env-file .env_dev build --no-cache
