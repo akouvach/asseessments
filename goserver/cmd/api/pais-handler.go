@@ -6,7 +6,7 @@ import (
 
 func (app *application) PaisGetAll(w http.ResponseWriter, r *http.Request) {
 
-	valores, err := app.models.DB.PaisGetAll()
+	valores, err := app.models.DB.PaisGetAll(app.config.db.name)
 	if err != nil {
 		app.errorJSON(w, err)
 		return

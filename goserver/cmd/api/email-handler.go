@@ -2,7 +2,8 @@ package main
 
 import (
 	"net/http"
-	"uscabe/utils"
+
+	"github.com/akouvach/assessments/utils"
 )
 
 func (app *application) SendMail(w http.ResponseWriter, r *http.Request) {

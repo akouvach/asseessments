@@ -4,7 +4,8 @@ import (
 	"errors"
 	"net/http"
 	"strconv"
-	"uscabe/models"
+
+	"github.com/akouvach/assessments/models"
 
 	"github.com/julienschmidt/httprouter"
 )

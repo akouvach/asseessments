@@ -6,7 +6,8 @@ import (
 	"fmt"
 	"net/http"
 	"time"
-	"uscabe/models"
+
+	"github.com/akouvach/assessments/models"
 
 	"github.com/pascaldekloe/jwt"
 	"golang.org/x/crypto/bcrypt"

@@ -1,6 +1,6 @@
 FROM golang:alpine as builder
 
-ENV PORT 4000
+ENV PORT $PORT
 
 WORKDIR /assess
 

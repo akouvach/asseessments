@@ -1,8 +1,9 @@
 package models
 
 import (
-	"database/sql"
 	"time"
+
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
 // Models is the wrapper for database
@@ -11,11 +12,12 @@ type Models struct {
 }
 
 type DBModel struct {
-	DB *sql.DB
+	DB *mongo.Client
 }
 
 // NewModels return models with db pool
-func NewModels(db *sql.DB) Models {
+func NewModels(db *mongo.Client) Models {
+
 	return Models{
 		DB: DBModel{DB: db},
 	}

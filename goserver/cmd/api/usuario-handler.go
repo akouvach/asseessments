@@ -8,8 +8,9 @@ import (
 	"log"
 	"net/http"
 	"strconv"
-	"uscabe/models"
-	"uscabe/utils"
+
+	"github.com/akouvach/assessments/models"
+	"github.com/akouvach/assessments/utils"
 
 	"github.com/julienschmidt/httprouter"
 )
