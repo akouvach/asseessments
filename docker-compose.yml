@@ -13,20 +13,20 @@ services:
       - PGID=1000
     networks: 
       - assessinternalnetwork  
-  pg_server:  #Este es el nombre del servidor de base de datos
-    image: 'postgres:latest'
-    ports:
-      - 5432:5432
-    restart: always
-    user: postgres
-    volumes:
-      - C:\Users\AZ431GL\_Never Backup\pg_assessments:/var/lib/postgresql/data/
-    environment:
-      POSTGRES_USER: postgres # The PostgreSQL user (useful to connect to the database)
-      POSTGRES_PASSWORD: mafalda # The PostgreSQL password (useful to connect to the database)
-      POSTGRES_DB: PostgreSQL # The PostgreSQL default database (automatically created at first launch)
-    networks: 
-      - assessinternalnetwork  
+  # pg_server:  #Este es el nombre del servidor de base de datos
+  #   image: 'postgres:latest'
+  #   ports:
+  #     - 5432:5432
+  #   restart: always
+  #   user: postgres
+  #   volumes:
+  #     - C:\Users\AZ431GL\_Never Backup\pg_assessments:/var/lib/postgresql/data/
+  #   environment:
+  #     POSTGRES_USER: postgres # The PostgreSQL user (useful to connect to the database)
+  #     POSTGRES_PASSWORD: mafalda # The PostgreSQL password (useful to connect to the database)
+  #     POSTGRES_DB: PostgreSQL # The PostgreSQL default database (automatically created at first launch)
+  #   networks: 
+  #     - assessinternalnetwork  
   adminer:
     image: adminer
     restart: always
@@ -34,21 +34,21 @@ services:
       - 8090:8080
     networks: 
       - assessinternalnetwork 
-  mysql_server:
-    image: mysql:latest
-    cap_add:
-      - SYS_NICE
-    restart: always
-    environment:
-      - MYSQL_DATABASE=assessments
-      - MYSQL_ROOT_PASSWORD=mafalda
-    ports:
-      - '3306:3306'
-    volumes:
-      - C:\Users\AZ431GL\_Never Backup\mysql_assessments:/var/lib/mysql
-      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
-    networks: 
-      - assessinternalnetwork  
+  # mysql_server:
+  #   image: mysql:latest
+  #   cap_add:
+  #     - SYS_NICE
+  #   restart: always
+  #   environment:
+  #     - MYSQL_DATABASE=assessments
+  #     - MYSQL_ROOT_PASSWORD=mafalda
+  #   ports:
+  #     - '3306:3306'
+  #   volumes:
+  #     - C:\Users\AZ431GL\_Never Backup\mysql_assessments:/var/lib/mysql
+  #     - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+  #   networks: 
+  #     - assessinternalnetwork  
       
   # go-app:
   #   build: 
