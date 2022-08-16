@@ -2,11 +2,12 @@ version: '3.8'
 services:
   mongo_server:
     image: mongo
-    restart: always
+    restart: unless-stopped
     ports:
       - 27017:27017  
     volumes:
       - C:\Users\AZ431GL\_Never Backup\mongo_assessments:/data/db 
+      - .\mongoserver\scripts:/data/scripts
       - .\mongoserver\mongo.conf:/etc/mongo/mongo.conf
     environment:
       - PUID=1000
@@ -29,27 +30,26 @@ services:
   #     - assessinternalnetwork  
   adminer:
     image: adminer
-    restart: always
+    restart: unless-stopped
     ports:
       - 8090:8080
     networks: 
       - assessinternalnetwork 
-  # mysql_server:
-  #   image: mysql:latest
-  #   cap_add:
-  #     - SYS_NICE
-  #   restart: always
-  #   environment:
-  #     - MYSQL_DATABASE=assessments
-  #     - MYSQL_ROOT_PASSWORD=mafalda
-  #   ports:
-  #     - '3306:3306'
-  #   volumes:
-  #     - C:\Users\AZ431GL\_Never Backup\mysql_assessments:/var/lib/mysql
-  #     - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
-  #   networks: 
-  #     - assessinternalnetwork  
-      
+  mysql_server:
+    image: mysql:latest
+    cap_add:
+      - SYS_NICE
+    restart: always
+    environment:
+      - MYSQL_DATABASE=assessments
+      - MYSQL_ROOT_PASSWORD=mafalda
+    ports:
+      - '3306:3306'
+    volumes:
+      - C:\Users\AZ431GL\_Never Backup\mysql_assessments:/var/lib/mysql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks: 
+      - assessinternalnetwork  
   # go-app:
   #   build: 
   #     context: ./goserver
@@ -62,6 +62,8 @@ services:
   #     - ARCH=amd64
   #     - PORT=${APPSRVPORT}
   #     - ENVIRONMENT=production
+  #   networks: 
+  #     - assessinternalnetwork  
 networks:
   assessinternalnetwork:
     driver: bridge

@@ -5,12 +5,7 @@ package utils
 
 import (
 	"fmt"
-	"log"
-	"os"
 	"reflect"
-
-	"github.com/sendgrid/sendgrid-go"
-	"github.com/sendgrid/sendgrid-go/helpers/mail"
 )
 
 type I interface{}
@@ -179,22 +174,22 @@ func translateRecursive(copy, original reflect.Value) {
 
 }
 
-func SendMail() {
-	from := mail.NewEmail("Eduardo", "akouvach@yahoo.com")
-	subject := "Sending with SendGrid is Fun"
-	to := mail.NewEmail("Andres", "akouvach@gmail.com")
-	plainTextContent := "and easy to do anywhere, even with Go"
-	htmlContent := "<strong>and easy to do anywhere, even with Go</strong>"
-	message := mail.NewSingleEmail(from, subject, to, plainTextContent, htmlContent)
-	client := sendgrid.NewSendClient(os.Getenv("SENDGRID_API_KEY"))
-	fmt.Println("api:", os.Getenv("SENDGRID_API_KEY"))
-	response, err := client.Send(message)
-	if err != nil {
-		log.Println("Error:", err)
-	} else {
-		fmt.Println("Respuestas-------------------------------")
-		fmt.Println(response.StatusCode)
-		fmt.Println(response.Body)
-		fmt.Println(response.Headers)
-	}
-}
+// func SendMail() {
+// 	from := mail.NewEmail("Eduardo", "akouvach@yahoo.com")
+// 	subject := "Sending with SendGrid is Fun"
+// 	to := mail.NewEmail("Andres", "akouvach@gmail.com")
+// 	plainTextContent := "and easy to do anywhere, even with Go"
+// 	htmlContent := "<strong>and easy to do anywhere, even with Go</strong>"
+// 	message := mail.NewSingleEmail(from, subject, to, plainTextContent, htmlContent)
+// 	client := sendgrid.NewSendClient(os.Getenv("SENDGRID_API_KEY"))
+// 	fmt.Println("api:", os.Getenv("SENDGRID_API_KEY"))
+// 	response, err := client.Send(message)
+// 	if err != nil {
+// 		log.Println("Error:", err)
+// 	} else {
+// 		fmt.Println("Respuestas-------------------------------")
+// 		fmt.Println(response.StatusCode)
+// 		fmt.Println(response.Body)
+// 		fmt.Println(response.Headers)
+// 	}
+// }

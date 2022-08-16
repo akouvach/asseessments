@@ -6,18 +6,18 @@ require (
 	github.com/julienschmidt/httprouter v1.3.0
 	github.com/justinas/alice v1.2.0
 	github.com/pascaldekloe/jwt v1.12.0
-	github.com/sendgrid/sendgrid-go v3.11.1+incompatible
-	go.mongodb.org/mongo-driver v1.10.0
+	go.mongodb.org/mongo-driver v1.10.1
 	golang.org/x/crypto v0.0.0-20220622213112-05595931fe9d
 )
 
 require (
-	github.com/golang/snappy v0.0.1 // indirect
+	github.com/go-sql-driver/mysql v1.6.0 // indirect
+	github.com/golang/snappy v0.0.4 // indirect
 	github.com/joho/godotenv v1.4.0 // indirect
 	github.com/klauspost/compress v1.13.6 // indirect
+	github.com/lib/pq v1.10.6 // indirect
 	github.com/montanaflynn/stats v0.0.0-20171201202039-1bf9dbcd8cbe // indirect
 	github.com/pkg/errors v0.9.1 // indirect
-	github.com/sendgrid/rest v2.6.9+incompatible // indirect
 	github.com/stretchr/testify v1.8.0 // indirect
 	github.com/xdg-go/pbkdf2 v1.0.0 // indirect
 	github.com/xdg-go/scram v1.1.1 // indirect
